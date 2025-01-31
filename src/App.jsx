@@ -1,37 +1,39 @@
-import styled from "styled-components";
-import GlobalStyle from "./styles/GlobalStyle";
-import Button from "./ui/Button";
-import Input from "./ui/Input";
-import Row from "./ui/Row";
-import Heading from "./ui/Heading";
-const StyledApp = styled.div`
-  padding: 20px;
-`;
-function App() {
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import Bookings from "./pages/Bookings";
+import Cabins from "./pages/Cabins";
+import Users from "./pages/Users";
+import Settings from "./pages/Settings";
+import Account from "./pages/Account";
+import Login from "./pages/Login";
+import PageNotFound from "./pages/PageNotFound";
+import GlobalStyles from "./styles/GlobalStyle";
+import AppLayout from "./ui/AppLayout";
+export default function App() {
   return (
     <>
-      <GlobalStyle />
-      <StyledApp>
-        <Row>
-          <Row type="horizontal">
-            <Heading as="h1">HELLO WORLD!</Heading>
-            <Heading as="h2">Check In And Out</Heading>
-            <Button>Check in</Button>
-            <Button variation="secondary" size="medium">
-              Check out
-            </Button>
-          </Row>
-          <Row>
-            <Heading as="h3">Forms!</Heading>
-            <form>
-              <Input />
-              <Input />
-            </form>
-          </Row>
-        </Row>
-      </StyledApp>
+      <GlobalStyles />
+      <BrowserRouter
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
+        <Routes>
+          <Route element={<AppLayout />}>
+            <Route index element={<Navigate replace to="dashboard" />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/bookings" element={<Bookings />} />
+            <Route path="/cabins" element={<Cabins />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/account" element={<Account />} />
+          </Route>
+
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
-
-export default App;
