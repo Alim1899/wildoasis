@@ -18,6 +18,7 @@ export const deleteCabin = async (id) => {
     console.error(error);
     throw new Error("Cabin could not be deleted");
   }
+
   return data;
 };
 
@@ -26,7 +27,6 @@ export const createCabins = async (newCabin) => {
     "/",
     ""
   );
-  console.log(newCabin);
   const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
   //https://qelbbwwgowyxbgzojfww.supabase.co/storage/v1/object/public/cabin-images//cabin-003.jpg
   const { data, error } = await supabase
@@ -48,5 +48,44 @@ export const createCabins = async (newCabin) => {
       "Cabin image could not be uploaded and new cabin isn't created"
     );
   }
+  return data;
+};
+
+export const editCabins = async (newCabin, id) => {
+  const hasOldImage =
+    typeof newCabin.image === "string" &&
+    newCabin.image.startsWith(supabaseUrl);
+
+  let imagePath = newCabin.image; // Keep old image if unchanged
+  let imageName = "";
+
+  if (!hasOldImage) {
+    imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll("/", "");
+    imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
+  }
+
+  const { data, error } = await supabase
+    .from("cabins")
+    .update({ ...newCabin, image: imagePath })
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Cabin could not be updated");
+  }
+
+  if (!hasOldImage) {
+    const { error: storageError } = await supabase.storage
+      .from("cabin-images")
+      .upload(imageName, newCabin.image);
+
+    if (storageError) {
+      console.error(storageError);
+      throw new Error("Cabin image could not be uploaded");
+    }
+  }
+
   return data;
 };
