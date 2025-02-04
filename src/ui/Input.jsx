@@ -7,8 +7,4 @@ const InputStyles = styled.input`
   box-shadow: var(--shadow-sm-);
 `;
 
-function Input() {
-  return <InputStyles type="number" placeholder="Num of guests"></InputStyles>;
-}
-
-export default Input;
+export default InputStyles;
