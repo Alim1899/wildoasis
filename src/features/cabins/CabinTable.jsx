@@ -11,7 +11,7 @@ const CabinTable = () => {
     <Table role="table">
       <TableHeader role="row">
         <div></div> <div>Cabin</div> <div>Capacity</div> <div>Price</div>{" "}
-        <div>Discound</div> <div></div>
+        <div>Discount</div> <div></div>
       </TableHeader>
       {cabins &&
         cabins.map((cabin) => {

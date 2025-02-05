@@ -8,7 +8,7 @@ export default function useCreateCabin() {
     mutationFn: createCabinApi,
     onSuccess: () => {
       toast.success("New cabin succesfully created");
-      queryClient.invalidateQueries({ queryKey: ["cabins"] });
+      queryClient.invalidateQueries({ queryKey: ["cabin"] });
     },
     onError: (err) => toast.error(err.message),
   });
