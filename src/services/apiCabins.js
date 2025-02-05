@@ -22,7 +22,7 @@ export const deleteCabin = async (id) => {
   return data;
 };
 
-export const createCabins = async (newCabin) => {
+export const createCabinApi = async (newCabin) => {
   const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll(
     "/",
     ""
@@ -51,7 +51,7 @@ export const createCabins = async (newCabin) => {
   return data;
 };
 
-export const editCabins = async (newCabin, id) => {
+export const editCabinApi = async (newCabin, id) => {
   const hasOldImage =
     typeof newCabin.image === "string" &&
     newCabin.image.startsWith(supabaseUrl);
