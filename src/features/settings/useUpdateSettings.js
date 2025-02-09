@@ -7,7 +7,7 @@ const useUpdateSetting = (newSetting) => {
   const { mutate: updateSetting, isLoading: isUpdating } = useMutation({
     mutationFn: updateSettingApi,
     onSuccess: () => {
-      toast.success("Setting succesfully updated");
+      toast.success("App settings succesfully updated");
       queryClient.invalidateQueries({ queryKey: ["settings"] });
     },
     onError: (err) => toast.error(err.message),

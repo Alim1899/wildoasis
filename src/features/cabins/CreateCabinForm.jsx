@@ -42,7 +42,7 @@ function CreateCabinForm({ cabinToEdit = { cabin: {} } }) {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <FormRow label="Cabin name" error={errors?.name?.message}>
+      <FormRow label="Cabin Name" error={errors?.name?.message}>
         <Input
           type="text"
           id="name"
@@ -53,7 +53,7 @@ function CreateCabinForm({ cabinToEdit = { cabin: {} } }) {
         />
       </FormRow>
 
-      <FormRow label="Maximum capacity" error={errors?.maxCapacity?.message}>
+      <FormRow label="Maximum Capacity" error={errors?.maxCapacity?.message}>
         <Input
           type="number"
           id="maxCapacity"
@@ -97,10 +97,7 @@ function CreateCabinForm({ cabinToEdit = { cabin: {} } }) {
         />
       </FormRow>
 
-      <FormRow
-        label="Description for website"
-        error={errors?.description?.message}
-      >
+      <FormRow label="Description for Web" error={errors?.description?.message}>
         <Textarea
           type="number"
           id="description"
@@ -111,7 +108,7 @@ function CreateCabinForm({ cabinToEdit = { cabin: {} } }) {
         />
       </FormRow>
 
-      <FormRow label="Cabin photo">
+      <FormRow label="Cabin Photo">
         <FileInput
           id="image"
           accept="image/*"

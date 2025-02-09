@@ -62,8 +62,8 @@ export default CabinRow;
 
 const TableRow = styled.div`
   display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
-  column-gap: 2.4rem;
+  grid-template-columns: 0.6fr 1.9fr 2.2fr 1fr 1fr 1fr;
+  column-gap: 2.5rem;
   align-items: center;
   padding: 1.4rem 2.4rem;
 
