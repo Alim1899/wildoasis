@@ -8,7 +8,7 @@ import FormRow from "../../ui/FormRow";
 import { useForm } from "react-hook-form";
 import useCreateCabin from "./useCreateCabin";
 import useEditCabin from "./useEditCabin";
-function CreateCabinForm({ cabinToEdit = { cabin: {} } }) {
+function CreateCabinForm({ cabinToEdit = { cabin: {} }, onCloseModal }) {
   const cabin = cabinToEdit?.cabin;
   const { id: editId, ...editValues } = cabin;
   const isEditSession = Boolean(editId);
@@ -28,20 +28,29 @@ function CreateCabinForm({ cabinToEdit = { cabin: {} } }) {
       editCabin(
         { newCabinData: { ...data, image }, id: editId },
         {
-          onSuccess: () => reset(data),
+          onSuccess: (data) => {
+            reset();
+            onCloseModal?.();
+          },
         }
       );
     else
       createCabin(
         { ...data, image: data.image[0] },
         {
-          onSuccess: () => reset(data),
+          onSuccess: (data) => {
+            reset();
+            onCloseModal?.();
+          },
         }
       );
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit)}
+      type={onCloseModal ? "moda" : "regular"}
+    >
       <FormRow label="Cabin Name" error={errors?.name?.message}>
         <Input
           type="text"
@@ -118,7 +127,11 @@ function CreateCabinForm({ cabinToEdit = { cabin: {} } }) {
         />
       </FormRow>
 
-      <Button $variation="secondary" type="reset">
+      <Button
+        $variation="secondary"
+        type="reset"
+        onClick={() => onCloseModal?.()}
+      >
         Cancel
       </Button>
       <Button disabled={isWorking}>
