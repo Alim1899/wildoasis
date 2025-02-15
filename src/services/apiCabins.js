@@ -2,7 +2,6 @@ import supabase from "./subapase";
 const supabaseUrl = "https://qelbbwwgowyxbgzojfww.supabase.co";
 const getCabins = async () => {
   const { data, error } = await supabase.from("cabins").select("*");
-  console.log(data);
   if (error) {
     console.log(error);
     throw new Error("Cabins could not be loaded");
